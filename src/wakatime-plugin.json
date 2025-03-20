@@ -1,0 +1,8 @@
+{
+    "KPlugin": {
+        "Description": "wakatime-plugin",
+        "Name": "wakatime-plugin"
+    },
+    "X-KDevelop-Category": "Global",
+    "X-KDevelop-Mode": "GUI"
+}
