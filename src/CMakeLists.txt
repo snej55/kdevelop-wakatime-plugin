@@ -17,4 +17,5 @@ kdevplatform_add_plugin(wakatime-plugin
 target_link_libraries(wakatime-plugin
     KDev::Interfaces
     KF6::I18n
+    KF6TextEditor
 )

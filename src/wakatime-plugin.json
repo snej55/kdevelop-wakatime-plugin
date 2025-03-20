@@ -1,6 +1,6 @@
 {
     "KPlugin": {
-        "Description": "wakatime-plugin",
+        "Description": "A WakaTime plugin for KDevelop",
         "Name": "wakatime-plugin"
     },
     "X-KDevelop-Category": "Global",

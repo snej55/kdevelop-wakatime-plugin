@@ -14,10 +14,13 @@ include(FeatureSummary)
 find_package(KDevPlatform 6.0.0 REQUIRED COMPONENTS
     Interfaces
     I18n
+    KTextEditor
 )
 
 find_package(KF6I18n NO_MODULE REQUIRED)
 ki18n_install(po)
+
+find_package(KF6TextEditor NO_MODULE REQUIRED)
 
 add_subdirectory(src)
 
