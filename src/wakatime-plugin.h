@@ -5,7 +5,14 @@
 #include <interfaces/icore.h>
 #include <interfaces/idocument.h>
 
+#include <QDateTime>
+
 #define KDEV_WAKATIME_PLUGIN_VERSION "1.0.0"
+
+struct HeartBeat {
+    QDateTime time;
+    QString file;
+};
 
 class WakatimePlugin : public KDevelop::IPlugin
 {
@@ -27,6 +34,14 @@ public Q_SLOTS:
     void documentClosed(void* document);
     void documentSaved(void* document);
     void documentOpened(void* document);
+
+protected:
+    void sendHeartBeat();
+
+    QString getWakatimeBinDir();
+    void checkWakatimeBin();
+
+    HeartBeat* lastHeartBeat {nullptr};
 };
 
 class WakatimePluginView : public QObject
