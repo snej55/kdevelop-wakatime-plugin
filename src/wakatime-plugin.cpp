@@ -8,6 +8,7 @@
 #include <interfaces/iprojectcontroller.h>
 
 #include <QDir>
+#include <QStandardPaths>
 
 K_PLUGIN_FACTORY_WITH_JSON(wakatime_pluginFactory, "wakatime-plugin.json", registerPlugin<WakatimePlugin>(); )
 
@@ -94,7 +95,7 @@ HeartBeat* WakatimePlugin::getLastHeartbeat()
         if (m_lastHeartBeat == nullptr)
         {
                 QDateTime now {QDateTime::currentDateTime()};
-                m_lastHeartBeat = new HeartBeat{now, ""};
+                m_lastHeartBeat = new HeartBeat{now, {}};
         }
         return m_lastHeartBeat;
 }
@@ -105,11 +106,37 @@ bool WakatimePlugin::enoughTimePassed(QDateTime time) const
         return time.secsTo(m_lastHeartBeat->time) >= 1200000;
 }
 
+QStringList WakatimePlugin::buildHeartbeat(QString file, QString project, const bool isWrite) const
+{
+        QStringList options;
+        options << "--entity" << file;
+
+        // if project isn't empty
+        if (!project.isEmpty()) {
+                options << "--alternate-project" << project;
+        }
+
+        if (isWrite) {
+                options << "--write";
+        }
+
+        QString pluginTitle {"kdevelop-wakatime-plugin"};
+        pluginTitle.append(QString{KDEV_WAKATIME_PLUGIN_VERSION});
+        options << "--plugin" << pluginTitle;
+
+        // locate config path
+        QString configPath {QStandardPaths::locate(QStandardPaths::HomeLocation, QStringLiteral(".wakatime.cfg"))};
+        if (!configPath.isEmpty()) {
+                options << "--config" << configPath;
+        }
+
+        return options;
+}
+
 void WakatimePlugin::sendHeartbeat(bool isWrite)
 {
-        if (isWrite) {
+        QStringList arguments;
 
-        }
 }
 
 WakatimePluginView::WakatimePluginView(WakatimePlugin* plugin)

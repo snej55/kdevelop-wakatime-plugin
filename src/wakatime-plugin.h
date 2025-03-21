@@ -11,7 +11,7 @@
 
 struct HeartBeat {
     QDateTime time;
-    QString file;
+    QUrl fileUrl;
 };
 
 class WakatimePlugin : public KDevelop::IPlugin
@@ -41,8 +41,10 @@ public Q_SLOTS:
     void documentOpened(void* document);
 
 protected:
+    QStringList buildHeartbeat(QString file, QString project, bool isWrite) const;
     void sendHeartbeat(bool isWrite);
     HeartBeat* getLastHeartbeat();
+    void updateLastHeartbeat(QUrl fileUrl);
 
     QString getWakatimeBinDir();
     void checkWakatimeBin();
