@@ -25,12 +25,12 @@ public:
     ~WakatimePlugin();
 
     // connect KDevelop::documentController signals to Q_SLOTS
-    void addListeners();
+    void addListeners(); // done
 
     // get project name
-    QString getProjectName(QUrl fileUrl);
+    QString getProjectName(QUrl fileUrl); // done
     // get document name
-    QString getFileName(QUrl fileUrl);
+    QString getFileName(QUrl fileUrl); // done
 
 public Q_SLOTS:
     // document events
@@ -41,15 +41,15 @@ public Q_SLOTS:
     void documentOpened(void* document);
 
 protected:
-    QStringList buildHeartbeat(QString file, QString project, bool isWrite) const;
-    void sendHeartbeat(bool isWrite);
-    HeartBeat* getLastHeartbeat();
-    void updateLastHeartbeat(QUrl fileUrl);
+    QStringList buildHeartbeat(QString file, QString project, bool isWrite) const; // done
+    void sendHeartbeat(QStringList options); // done
+    HeartBeat* getLastHeartbeat(); // done
+    void updateLastHeartbeat(QUrl fileUrl); // done
 
     QString getWakatimeBinDir();
     void checkWakatimeBin();
 
-    bool enoughTimePassed(QDateTime time) const;
+    bool enoughTimePassed(QDateTime time) const;  // done
 
     HeartBeat* m_lastHeartBeat {nullptr};
 };

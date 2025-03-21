@@ -2,6 +2,7 @@
 
 #include <debug.h>
 
+#include <KLocalizedString>
 #include <KPluginFactory>
 
 #include <interfaces/idocumentcontroller.h>
@@ -9,6 +10,7 @@
 
 #include <QDir>
 #include <QStandardPaths>
+#include <QProcess>
 
 K_PLUGIN_FACTORY_WITH_JSON(wakatime_pluginFactory, "wakatime-plugin.json", registerPlugin<WakatimePlugin>(); )
 
@@ -82,11 +84,13 @@ QString WakatimePlugin::getFileName(QUrl fileUrl)
         return fileUrl.fileName();
 }
 
-void WakatimePlugin::documentSwitched(void* document)
+void WakatimePlugin::documentOpened(void* document)
 {
         KDevelop::IDocument* doc {static_cast<KDevelop::IDocument*>(document)};
         if (enoughTimePassed(QDateTime::currentDateTime())) {
-
+                QStringList options {buildHeartbeat(doc->url().path(), getProjectName(doc->url()), false)};
+                sendHeartbeat(options);
+                updateLastHeartbeat(doc->url());
         }
 }
 
@@ -98,6 +102,13 @@ HeartBeat* WakatimePlugin::getLastHeartbeat()
                 m_lastHeartBeat = new HeartBeat{now, {}};
         }
         return m_lastHeartBeat;
+}
+
+void WakatimePlugin::updateLastHeartbeat(QUrl filePath)
+{
+        QDateTime now {QDateTime::currentDateTime()};
+        delete m_lastHeartBeat;
+        m_lastHeartBeat = new HeartBeat{now, filePath};
 }
 
 
@@ -133,10 +144,32 @@ QStringList WakatimePlugin::buildHeartbeat(QString file, QString project, const 
         return options;
 }
 
-void WakatimePlugin::sendHeartbeat(bool isWrite)
+void WakatimePlugin::sendHeartbeat(QStringList options)
 {
-        QStringList arguments;
+        // get wakatime-cli binary
+        QString bin {getWakatimeBinDir()};
 
+        // create new process to post heartbeat
+        QProcess* sender {new QProcess{this}};
+        sender->setProcessChannelMode(QProcess::MergedChannels);
+        qCDebug(PLUGIN_WAKATIME_PLUGIN) << bin << options;
+        sender->startDetached(bin, options);
+
+        // handle errors
+        if (!sender->waitForFinished()) {
+                qCDebug(PLUGIN_WAKATIME_PLUGIN) << "Heartbeat failed: " << sender->errorString();
+        } else {
+                if (sender->exitCode() == 102) {
+                        qCDebug(PLUGIN_WAKATIME_PLUGIN) << "Wakatime is offline! Coding activity will be synced when online.";
+                        setErrorDescription(i18n("Wakatime is offline! Coding activity will be synced when online."));
+                } else if (sender->exitCode() == 103) {
+                        qCDebug(PLUGIN_WAKATIME_PLUGIN) << "An error occured while parsing $WAKATIME_HOME/.wakatime.cfg. Check $WAKATIME_HOME/.wakatime.log for more details.";
+                        setErrorDescription(i18n("An error occured while parsing $WAKATIME_HOME/.wakatime.cfg. Check $WAKATIME_HOME/.wakatime.log for more details."));
+                } else if (sender->exitCode() == 104) {
+                        qCDebug(PLUGIN_WAKATIME_PLUGIN) << "Invalid API key. Please make sure your API key is correct.";
+                        setErrorDescription(i18n("Invalid API key. Please make sure your API key is correct."));
+                }
+        }
 }
 
 WakatimePluginView::WakatimePluginView(WakatimePlugin* plugin)
