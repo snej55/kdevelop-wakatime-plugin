@@ -1,4 +1,4 @@
-# Wakatime KDevelop Plugin
+# Wakatime for KDevelop
 
 ## Installation instructions
 

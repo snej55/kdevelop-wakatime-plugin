@@ -32,13 +32,15 @@ public:
     // get document name
     QString getFileName(QUrl fileUrl); // done
 
+    void passDocument(void* document, bool isWrite);
+
 public Q_SLOTS:
     // document events
-    void documentSwitched(void* document);
-    void documentModified(void* document);
-    void documentClosed(void* document);
+    void documentJumpPerformed(void* document);
+    void documentActivated(void* document);
     void documentSaved(void* document);
     void documentOpened(void* document);
+    void documentClosed(void* document);
 
 protected:
     QStringList buildHeartbeat(QString file, QString project, bool isWrite) const; // done

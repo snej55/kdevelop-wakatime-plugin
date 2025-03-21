@@ -19,6 +19,9 @@ WakatimePlugin::WakatimePlugin(QObject* parent, const KPluginMetaData& metaData,
 {
     Q_UNUSED(args);
 
+    checkWakatimeBin();
+    addListeners();
+
     qCDebug(PLUGIN_WAKATIME_PLUGIN) << "Wakatime plugin is loaded!";
 }
 
@@ -31,27 +34,26 @@ WakatimePlugin::~WakatimePlugin()
 void WakatimePlugin::addListeners()
 {
     // connect documentController signals to WakatimePlugin slots
-    connect(KDevelop::ICore::self()->documentController(),
-            &KDevelop::IDocumentController::documentJumpPerformed,
-            this,
-            &WakatimePlugin::documentModified);
-    connect(KDevelop::ICore::self()->documentController(),
-            &KDevelop::IDocumentController::documentClosed,
-            this,
-            &WakatimePlugin::documentClosed);
-    connect(KDevelop::ICore::self()->documentController(),
-            &KDevelop::IDocumentController::documentOpened,
-            this,
-            &WakatimePlugin::documentOpened);
-    connect(KDevelop::ICore::self()->documentController(),
-            &KDevelop::IDocumentController::documentSaved,
-            this,
-            &WakatimePlugin::documentSaved);
-    connect(KDevelop::ICore::self()->documentController(),
-            &KDevelop::IDocumentController::documentLoaded,
-            this,
-            &WakatimePlugin::documentSwitched);
+    connect(KDevelop::ICore::self()->documentController(), &KDevelop::IDocumentController::documentJumpPerformed, this, &WakatimePlugin::documentJumpPerformed);
+    connect(KDevelop::ICore::self()->documentController(), &KDevelop::IDocumentController::documentClosed, this, &WakatimePlugin::documentClosed);
+    connect(KDevelop::ICore::self()->documentController(), &KDevelop::IDocumentController::documentOpened, this, &WakatimePlugin::documentOpened);
+    connect(KDevelop::ICore::self()->documentController(),&KDevelop::IDocumentController::documentSaved, this, &WakatimePlugin::documentSaved);
+    connect(KDevelop::ICore::self()->documentController(), &KDevelop::IDocumentController::documentActivated, this, &WakatimePlugin::documentActivated);
 }
+
+QString WakatimePlugin::getWakatimeBinDir()
+{
+        return QStandardPaths::findExecutable(QStringLiteral("wakatime"));
+}
+
+void WakatimePlugin::checkWakatimeBin()
+{
+        if (getWakatimeBinDir().isEmpty()) {
+                qCDebug(PLUGIN_WAKATIME_PLUGIN) << "Unable to find wakatime executable. Please make sure it is installed.";
+                setErrorDescription(i18n("Unable to find wakatime executable. Please make sure it is installed."));
+        }
+}
+
 
 QString WakatimePlugin::getProjectName(QUrl fileUrl)
 {
@@ -84,14 +86,40 @@ QString WakatimePlugin::getFileName(QUrl fileUrl)
         return fileUrl.fileName();
 }
 
-void WakatimePlugin::documentOpened(void* document)
+void WakatimePlugin::passDocument(void* document, bool isWrite)
 {
         KDevelop::IDocument* doc {static_cast<KDevelop::IDocument*>(document)};
         if (enoughTimePassed(QDateTime::currentDateTime())) {
-                QStringList options {buildHeartbeat(doc->url().path(), getProjectName(doc->url()), false)};
+                QStringList options {buildHeartbeat(doc->url().path(), getProjectName(doc->url()), isWrite)};
                 sendHeartbeat(options);
                 updateLastHeartbeat(doc->url());
         }
+}
+
+void WakatimePlugin::documentJumpPerformed(void* document)
+{
+        passDocument(document, false);
+}
+
+
+void WakatimePlugin::documentOpened(void* document)
+{
+        passDocument(document, false);
+}
+
+void WakatimePlugin::documentActivated(void* document)
+{
+        passDocument(document, false);
+}
+
+void WakatimePlugin::documentClosed(void* document)
+{
+        passDocument(document, false);
+}
+
+void WakatimePlugin::documentSaved(void* document)
+{
+        passDocument(document, true);
 }
 
 HeartBeat* WakatimePlugin::getLastHeartbeat()
