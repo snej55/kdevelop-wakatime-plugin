@@ -27,6 +27,11 @@ public:
     // connect KDevelop::documentController signals to Q_SLOTS
     void addListeners();
 
+    // get project name
+    QString getProjectName(QUrl fileUrl);
+    // get document name
+    QString getFileName(QUrl fileUrl);
+
 public Q_SLOTS:
     // document events
     void documentSwitched(void* document);
@@ -36,12 +41,15 @@ public Q_SLOTS:
     void documentOpened(void* document);
 
 protected:
-    void sendHeartBeat();
+    void sendHeartbeat(bool isWrite);
+    HeartBeat* getLastHeartbeat();
 
     QString getWakatimeBinDir();
     void checkWakatimeBin();
 
-    HeartBeat* lastHeartBeat {nullptr};
+    bool enoughTimePassed(QDateTime time) const;
+
+    HeartBeat* m_lastHeartBeat {nullptr};
 };
 
 class WakatimePluginView : public QObject
