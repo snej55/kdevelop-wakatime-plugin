@@ -48,8 +48,8 @@ protected:
     HeartBeat* getLastHeartbeat(); // done
     void updateLastHeartbeat(QUrl fileUrl); // done
 
-    QString getWakatimeBinDir();
-    void checkWakatimeBin();
+    QString getWakatimeBinDir(); // done
+    void checkWakatimeBin(); // done
 
     bool enoughTimePassed(QDateTime time) const;  // done
 
