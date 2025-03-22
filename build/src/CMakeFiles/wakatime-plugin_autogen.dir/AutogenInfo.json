@@ -1,0 +1,153 @@
+{
+	"BUILD_DIR" : "/home/jenskromdijk/projects/wakatime-plugin/build/src/wakatime-plugin_autogen",
+	"CMAKE_BINARY_DIR" : "/home/jenskromdijk/projects/wakatime-plugin/build",
+	"CMAKE_CURRENT_BINARY_DIR" : "/home/jenskromdijk/projects/wakatime-plugin/build/src",
+	"CMAKE_CURRENT_SOURCE_DIR" : "/home/jenskromdijk/projects/wakatime-plugin/src",
+	"CMAKE_EXECUTABLE" : "/usr/bin/cmake",
+	"CMAKE_LIST_FILES" : 
+	[
+		"/home/jenskromdijk/projects/wakatime-plugin/src/CMakeLists.txt",
+		"/usr/share/ECM/modules/ECMQtDeclareLoggingCategory.cpp.in",
+		"/usr/share/ECM/modules/ECMQtDeclareLoggingCategory.h.in"
+	],
+	"CMAKE_SOURCE_DIR" : "/home/jenskromdijk/projects/wakatime-plugin",
+	"CROSS_CONFIG" : false,
+	"DEP_FILE" : "/home/jenskromdijk/projects/wakatime-plugin/build/src/wakatime-plugin_autogen/deps",
+	"DEP_FILE_RULE_NAME" : "wakatime-plugin_autogen/timestamp",
+	"HEADERS" : 
+	[
+		[
+			"/home/jenskromdijk/projects/wakatime-plugin/build/src/debug.h",
+			"Mu",
+			"EJRQKI7XPS/moc_debug.cpp",
+			null
+		],
+		[
+			"/home/jenskromdijk/projects/wakatime-plugin/src/wakatime-plugin.h",
+			"Mu",
+			"EWIEGA46WW/moc_wakatime-plugin.cpp",
+			null
+		]
+	],
+	"HEADER_EXTENSIONS" : [ "h", "hh", "h++", "hm", "hpp", "hxx", "in", "txx" ],
+	"INCLUDE_DIR" : "/home/jenskromdijk/projects/wakatime-plugin/build/src/wakatime-plugin_autogen/include",
+	"MOC_COMPILATION_FILE" : "/home/jenskromdijk/projects/wakatime-plugin/build/src/wakatime-plugin_autogen/mocs_compilation.cpp",
+	"MOC_DEFINITIONS" : 
+	[
+		"KCOREADDONS_LIB",
+		"KGUIADDONS_LIB",
+		"QT_CORE5COMPAT_LIB",
+		"QT_CORE_LIB",
+		"QT_DBUS_LIB",
+		"QT_GUI_LIB",
+		"QT_NETWORK_LIB",
+		"QT_WIDGETS_LIB",
+		"QT_XML_LIB",
+		"_GNU_SOURCE",
+		"_LARGEFILE64_SOURCE",
+		"wakatime_plugin_EXPORTS"
+	],
+	"MOC_DEPEND_FILTERS" : 
+	[
+		[
+			"Q_PLUGIN_METADATA",
+			"[\n][ \t]*Q_PLUGIN_METADATA[ \t]*\\([^\\)]*FILE[ \t]*\"([^\"]+)\""
+		],
+		[
+			"K_PLUGIN_FACTORY_WITH_JSON",
+			"[\n^][ \t]*K_PLUGIN_FACTORY_WITH_JSON[ \t\n]*\\([^,]*,[ \t\n]*\"([^\"]+)\""
+		],
+		[
+			"K_PLUGIN_CLASS_WITH_JSON",
+			"[\n^][ \t]*K_PLUGIN_CLASS_WITH_JSON[ \t\n]*\\([^,]*,[ \t\n]*\"([^\"]+)\""
+		]
+	],
+	"MOC_INCLUDES" : 
+	[
+		"/home/jenskromdijk/projects/wakatime-plugin/build/src",
+		"/home/jenskromdijk/projects/wakatime-plugin/src",
+		"/usr/include/kdevplatform",
+		"/usr/include/qt6/QtCore5Compat",
+		"/usr/include/qt6",
+		"/usr/include/qt6/QtCore",
+		"/usr/lib/qt6/mkspecs/linux-g++",
+		"/usr/include/KF6/KTextEditor",
+		"/usr/include/KF6/KParts",
+		"/usr/include/KF6/KIOCore",
+		"/usr/include/KF6/KIO",
+		"/usr/include/KF6/KCoreAddons",
+		"/usr/include/qt6/QtNetwork",
+		"/usr/include/qt6/QtDBus",
+		"/usr/include/KF6/KXmlGui",
+		"/usr/include/qt6/QtXml",
+		"/usr/include/qt6/QtWidgets",
+		"/usr/include/qt6/QtGui",
+		"/usr/include/KF6/KConfig",
+		"/usr/include/KF6/KConfigCore",
+		"/usr/include/KF6/KConfigWidgets",
+		"/usr/include/KF6/KWidgetsAddons",
+		"/usr/include/KF6/KConfigGui",
+		"/usr/include/KF6/KColorScheme",
+		"/usr/include/KF6/KGuiAddons",
+		"/usr/include/KF6/KCompletion",
+		"/usr/include/KF6/KSyntaxHighlighting",
+		"/usr/include/KF6/KI18n",
+		"/usr/include",
+		"/usr/include/c++/14.2.1",
+		"/usr/include/c++/14.2.1/x86_64-pc-linux-gnu",
+		"/usr/include/c++/14.2.1/backward",
+		"/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include",
+		"/usr/local/include",
+		"/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include-fixed"
+	],
+	"MOC_MACRO_NAMES" : 
+	[
+		"Q_OBJECT",
+		"Q_GADGET",
+		"Q_NAMESPACE",
+		"Q_NAMESPACE_EXPORT",
+		"Q_GADGET_EXPORT",
+		"Q_ENUM_NS",
+		"K_PLUGIN_FACTORY",
+		"K_PLUGIN_CLASS",
+		"K_PLUGIN_FACTORY_WITH_JSON",
+		"K_PLUGIN_CLASS_WITH_JSON"
+	],
+	"MOC_OPTIONS" : [],
+	"MOC_PATH_PREFIX" : false,
+	"MOC_PREDEFS_CMD" : 
+	[
+		"/usr/bin/c++",
+		"-std=gnu++11",
+		"-dM",
+		"-E",
+		"-c",
+		"/usr/share/cmake/Modules/CMakeCXXCompilerABI.cpp"
+	],
+	"MOC_PREDEFS_FILE" : "/home/jenskromdijk/projects/wakatime-plugin/build/src/wakatime-plugin_autogen/moc_predefs.h",
+	"MOC_RELAXED_MODE" : false,
+	"MOC_SKIP" : [],
+	"MULTI_CONFIG" : false,
+	"PARALLEL" : 8,
+	"PARSE_CACHE_FILE" : "/home/jenskromdijk/projects/wakatime-plugin/build/src/CMakeFiles/wakatime-plugin_autogen.dir/ParseCache.txt",
+	"QT_MOC_EXECUTABLE" : "/usr/lib/qt6/moc",
+	"QT_UIC_EXECUTABLE" : "",
+	"QT_VERSION_MAJOR" : 6,
+	"QT_VERSION_MINOR" : 8,
+	"SETTINGS_FILE" : "/home/jenskromdijk/projects/wakatime-plugin/build/src/CMakeFiles/wakatime-plugin_autogen.dir/AutogenUsed.txt",
+	"SOURCES" : 
+	[
+		[
+			"/home/jenskromdijk/projects/wakatime-plugin/build/src/debug.cpp",
+			"Mu",
+			null
+		],
+		[
+			"/home/jenskromdijk/projects/wakatime-plugin/src/wakatime-plugin.cpp",
+			"Mu",
+			null
+		]
+	],
+	"USE_BETTER_GRAPH" : true,
+	"VERBOSITY" : 0
+}

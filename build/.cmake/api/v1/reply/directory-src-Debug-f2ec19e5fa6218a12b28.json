@@ -1,0 +1,64 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"install",
+			"kdevplatform_add_plugin"
+		],
+		"files" : 
+		[
+			"/usr/lib/cmake/KDevPlatform/KDevPlatformMacros.cmake",
+			"src/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 1
+			},
+			{
+				"command" : 1,
+				"file" : 1,
+				"line" : 13,
+				"parent" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 125,
+				"parent" : 1
+			}
+		]
+	},
+	"installers" : 
+	[
+		{
+			"backtrace" : 2,
+			"component" : "wakatime-plugin",
+			"destination" : "lib/qt6/plugins/kdevplatform/61",
+			"paths" : 
+			[
+				"bin/wakatime-plugin.so"
+			],
+			"targetId" : "wakatime-plugin::@145eef247bfb46b6828c",
+			"targetIndex" : 23,
+			"type" : "target"
+		},
+		{
+			"backtrace" : 2,
+			"component" : "wakatime-plugin",
+			"cxxModuleBmiTarget" : 
+			{
+				"id" : "wakatime-plugin::@145eef247bfb46b6828c",
+				"index" : 23
+			},
+			"destination" : "lib/qt6/plugins/kdevplatform/61",
+			"type" : "cxxModuleBmi"
+		}
+	],
+	"paths" : 
+	{
+		"build" : "src",
+		"source" : "src"
+	}
+}

@@ -1,6 +1,6 @@
 # Wakatime for KDevelop
 
-## Dependencies:
+## Prerequisites:
 
 The following are required to be installed:
 
@@ -13,6 +13,8 @@ The following are required to be installed:
 For information see: 
  * [Building KDE software with kde-builder](https://develop.kde.org/docs/getting-started/building/kde-builder-compile/)
  * [KDevelop - Arch Wiki](https://wiki.archlinux.org/title/KDevelop)
+ 
+Additionally, make sure your API key is located in `~/.wakatime.cfg`.
 
 ## Installation instructions:
 
