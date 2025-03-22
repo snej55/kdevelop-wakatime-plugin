@@ -12,6 +12,8 @@
 #include <QStandardPaths>
 #include <QProcess>
 
+#include <iostream>
+
 K_PLUGIN_FACTORY_WITH_JSON(wakatime_pluginFactory, "wakatime-plugin.json", registerPlugin<WakatimePlugin>(); )
 
 WakatimePlugin::WakatimePlugin(QObject* parent, const KPluginMetaData& metaData, const QVariantList& args)
@@ -19,6 +21,7 @@ WakatimePlugin::WakatimePlugin(QObject* parent, const KPluginMetaData& metaData,
 {
     Q_UNUSED(args);
 
+    updateLastHeartbeat({});
     checkWakatimeBin();
     addListeners();
 
@@ -88,11 +91,15 @@ QString WakatimePlugin::getFileName(QUrl fileUrl)
 
 void WakatimePlugin::passDocument(void* document, bool isWrite)
 {
+        std::cout << "Trying to send heartbeat!\n";
         KDevelop::IDocument* doc {static_cast<KDevelop::IDocument*>(document)};
-        if (enoughTimePassed(QDateTime::currentDateTime())) {
+        if (enoughTimePassed(QDateTime::currentDateTime()) || m_lastHeartBeat->fileUrl != doc->url()) {
+                std::cout << "Enough time has passed!\n";
                 QStringList options {buildHeartbeat(doc->url().path(), getProjectName(doc->url()), isWrite)};
                 sendHeartbeat(options);
                 updateLastHeartbeat(doc->url());
+        } else {
+                std::cout << "Not enough time has passed!\n";
         }
 }
 
@@ -142,7 +149,8 @@ void WakatimePlugin::updateLastHeartbeat(QUrl filePath)
 
 bool WakatimePlugin::enoughTimePassed(QDateTime time) const
 {
-        return time.secsTo(m_lastHeartBeat->time) >= 1200000;
+        std::cout << m_lastHeartBeat->time.secsTo(time) << '\n';
+        return m_lastHeartBeat->time.secsTo(time) >= 120; // check if time is greater than 2 minutes
 }
 
 QStringList WakatimePlugin::buildHeartbeat(QString file, QString project, const bool isWrite) const
@@ -174,6 +182,8 @@ QStringList WakatimePlugin::buildHeartbeat(QString file, QString project, const 
 
 void WakatimePlugin::sendHeartbeat(QStringList options)
 {
+        ++m_heartBeatNum;
+        std::cout << "SENDING HEARTBEAT!" << '\n';
         // get wakatime-cli binary
         QString bin {getWakatimeBinDir()};
 

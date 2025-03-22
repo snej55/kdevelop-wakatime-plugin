@@ -54,6 +54,9 @@ protected:
     bool enoughTimePassed(QDateTime time) const;  // done
 
     HeartBeat* m_lastHeartBeat {nullptr};
+
+    // number of heartbeats
+    unsigned int m_heartBeatNum {0};
 };
 
 class WakatimePluginView : public QObject
