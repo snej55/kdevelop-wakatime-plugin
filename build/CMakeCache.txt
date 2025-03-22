@@ -27,9 +27,6 @@ BUILD_SHARED_LIBS:BOOL=TRUE
 //Build the testing tree.
 BUILD_TESTING:BOOL=ON
 
-//Build against Qt 6
-BUILD_WITH_QT6:BOOL=OFF
-
 //Path to a program.
 CMAKE_ADDR2LINE:FILEPATH=/usr/bin/addr2line
 
@@ -39,6 +36,9 @@ CMAKE_AR:FILEPATH=/usr/bin/ar
 //Choose the type of build, options are: None Debug Release RelWithDebInfo
 // MinSizeRel ...
 CMAKE_BUILD_TYPE:STRING=Debug
+
+//Enable/Disable color output during build.
+CMAKE_COLOR_MAKEFILE:BOOL=ON
 
 //CXX compiler
 CMAKE_CXX_COMPILER:FILEPATH=/usr/bin/c++
@@ -110,9 +110,6 @@ CMAKE_EXE_LINKER_FLAGS_RELEASE:STRING=
 //Flags used by the linker during RELWITHDEBINFO builds.
 CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO:STRING=
 
-//Enable/Disable output of build database during the build.
-CMAKE_EXPORT_BUILD_DATABASE:BOOL=
-
 //No help, variable specified on the command line.
 CMAKE_EXPORT_COMPILE_COMMANDS:UNINITIALIZED=ON
 
@@ -134,8 +131,8 @@ CMAKE_INSTALL_RUNSTATEDIR:PATH=
 //Path to a program.
 CMAKE_LINKER:FILEPATH=/usr/bin/ld
 
-//Program used to build from build.ninja files.
-CMAKE_MAKE_PROGRAM:FILEPATH=/usr/bin/ninja
+//Path to a program.
+CMAKE_MAKE_PROGRAM:FILEPATH=/usr/bin/make
 
 //Flags used by the linker during the creation of modules during
 // all build types.
@@ -345,20 +342,8 @@ KDE_INSTALL_KCONFUPDATEDIR:PATH=
 //KDevelop file templates (DATAROOTDIR/kdevfiletemplates/templates)
 KDE_INSTALL_KFILETEMPLATESDIR:PATH=
 
-//knotify description files (DATAROOTDIR/knotifications5)
-KDE_INSTALL_KNOTIFY5RCDIR:PATH=
-
 //knotify description files (DATAROOTDIR/knotifications6)
 KDE_INSTALL_KNOTIFYRCDIR:PATH=
-
-//services for KDE Frameworks 5 (DATAROOTDIR/kservices5)
-KDE_INSTALL_KSERVICES5DIR:PATH=
-
-//service types for KDE Frameworks 5 (DATAROOTDIR/kservicetypes5)
-KDE_INSTALL_KSERVICETYPES5DIR:PATH=
-
-//kxmlgui .rc files (DATAROOTDIR/kxmlgui5)
-KDE_INSTALL_KXMLGUI5DIR:PATH=
 
 //kxmlgui .rc files (DATAROOTDIR/kxmlgui5)
 KDE_INSTALL_KXMLGUIDIR:PATH=
@@ -375,7 +360,7 @@ KDE_INSTALL_LOCALEDIR:PATH=
 //modifiable single-machine data (var)
 KDE_INSTALL_LOCALSTATEDIR:PATH=
 
-//Qt Logging categories files (DATAROOTDIR/qlogging-categories5)
+//Qt Logging categories files (DATAROOTDIR/qlogging-categories6)
 KDE_INSTALL_LOGGINGCATEGORIESDIR:PATH=
 
 //man documentation (DATAROOTDIR/man)
@@ -397,18 +382,15 @@ KDE_INSTALL_PREFIX_SCRIPT:BOOL=OFF
 //documentation bundles in QCH format (DATAROOTDIR/doc/qch)
 KDE_INSTALL_QCHDIR:PATH=
 
-//QtQuick2 imports (lib/qt/qml)
+//QtQuick2 imports (lib/qt6/qml)
 KDE_INSTALL_QMLDIR:PATH=
 
-//Qt plugins (lib/qt/plugins)
+//Qt plugins (lib/qt6/plugins)
 KDE_INSTALL_QTPLUGINDIR:PATH=
 
 //documentation bundles in QCH format for Qt-extending libraries
-// (/usr/share/doc/qt)
+// (/usr/share/doc/qt6)
 KDE_INSTALL_QTQCHDIR:PATH=
-
-//QtQuick1 imports (lib/qt/imports)
-KDE_INSTALL_QTQUICKIMPORTSDIR:PATH=
 
 //system admin executables (EXECROOTDIR/sbin)
 KDE_INSTALL_SBINDIR:PATH=
@@ -580,9 +562,6 @@ QT_ADDITIONAL_PACKAGES_PREFIX_PATH:STRING=
 
 //No help, variable specified on the command line.
 QT_MAJOR_VERSION:UNINITIALIZED=6
-
-//The directory containing a CMake configuration file for Qt5Core.
-Qt5Core_DIR:PATH=/usr/lib/cmake/Qt5Core
 
 //The directory containing a CMake configuration file for Qt6Concurrent.
 Qt6Concurrent_DIR:PATH=/usr/lib/cmake/Qt6Concurrent
@@ -1133,6 +1112,8 @@ wakatime-plugin_SOURCE_DIR:STATIC=/home/jenskromdijk/projects/wakatime-plugin
 CMAKE_ADDR2LINE-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_AR
 CMAKE_AR-ADVANCED:INTERNAL=1
+//STRINGS property for variable: CMAKE_BUILD_TYPE
+CMAKE_BUILD_TYPE-STRINGS:INTERNAL=Debug;Release;MinSizeRel;RelWithDebInfo
 //This is the directory where this CMakeCache.txt was created
 CMAKE_CACHEFILE_DIR:INTERNAL=/home/jenskromdijk/projects/wakatime-plugin/build
 //Major version of cmake used to create the current loaded cache
@@ -1141,6 +1122,8 @@ CMAKE_CACHE_MAJOR_VERSION:INTERNAL=3
 CMAKE_CACHE_MINOR_VERSION:INTERNAL=31
 //Patch version of cmake used to create the current loaded cache
 CMAKE_CACHE_PATCH_VERSION:INTERNAL=6
+//ADVANCED property for variable: CMAKE_COLOR_MAKEFILE
+CMAKE_COLOR_MAKEFILE-ADVANCED:INTERNAL=1
 //Path to CMake executable.
 CMAKE_COMMAND:INTERNAL=/usr/bin/cmake
 //Path to cpack program executable.
@@ -1195,12 +1178,12 @@ CMAKE_EXE_LINKER_FLAGS_MINSIZEREL-ADVANCED:INTERNAL=1
 CMAKE_EXE_LINKER_FLAGS_RELEASE-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO
 CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: CMAKE_EXPORT_BUILD_DATABASE
-CMAKE_EXPORT_BUILD_DATABASE-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_EXPORT_COMPILE_COMMANDS
+CMAKE_EXPORT_COMPILE_COMMANDS-ADVANCED:INTERNAL=1
 //Name of external makefile project generator.
 CMAKE_EXTRA_GENERATOR:INTERNAL=
 //Name of generator.
-CMAKE_GENERATOR:INTERNAL=Ninja
+CMAKE_GENERATOR:INTERNAL=Unix Makefiles
 //Generator instance identifier.
 CMAKE_GENERATOR_INSTANCE:INTERNAL=
 //Name of generator platform.
@@ -1302,8 +1285,6 @@ FIND_PACKAGE_MESSAGE_DETAILS_Cups:INTERNAL=[/usr/lib/libcups.so][/usr/include][v
 FIND_PACKAGE_MESSAGE_DETAILS_Gettext:INTERNAL=[/usr/bin/msgmerge][/usr/bin/msgfmt][v0.24()]
 //Details about finding OpenGL
 FIND_PACKAGE_MESSAGE_DETAILS_OpenGL:INTERNAL=[/usr/lib/libOpenGL.so][/usr/lib/libGLX.so][/usr/include][c ][v()]
-//Details about finding Threads
-FIND_PACKAGE_MESSAGE_DETAILS_Threads:INTERNAL=[TRUE][v()]
 //Details about finding WrapAtomic
 FIND_PACKAGE_MESSAGE_DETAILS_WrapAtomic:INTERNAL=[1][v()]
 //Details about finding WrapOpenGL
@@ -1374,16 +1355,8 @@ KDE_INSTALL_KCFGDIR-ADVANCED:INTERNAL=1
 KDE_INSTALL_KCONFUPDATEDIR-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: KDE_INSTALL_KFILETEMPLATESDIR
 KDE_INSTALL_KFILETEMPLATESDIR-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: KDE_INSTALL_KNOTIFY5RCDIR
-KDE_INSTALL_KNOTIFY5RCDIR-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: KDE_INSTALL_KNOTIFYRCDIR
 KDE_INSTALL_KNOTIFYRCDIR-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: KDE_INSTALL_KSERVICES5DIR
-KDE_INSTALL_KSERVICES5DIR-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: KDE_INSTALL_KSERVICETYPES5DIR
-KDE_INSTALL_KSERVICETYPES5DIR-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: KDE_INSTALL_KXMLGUI5DIR
-KDE_INSTALL_KXMLGUI5DIR-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: KDE_INSTALL_KXMLGUIDIR
 KDE_INSTALL_KXMLGUIDIR-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: KDE_INSTALL_LIBDIR
@@ -1412,8 +1385,6 @@ KDE_INSTALL_QMLDIR-ADVANCED:INTERNAL=1
 KDE_INSTALL_QTPLUGINDIR-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: KDE_INSTALL_QTQCHDIR
 KDE_INSTALL_QTQCHDIR-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: KDE_INSTALL_QTQUICKIMPORTSDIR
-KDE_INSTALL_QTQUICKIMPORTSDIR-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: KDE_INSTALL_SBINDIR
 KDE_INSTALL_SBINDIR-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: KDE_INSTALL_SHAREDSTATEDIR
