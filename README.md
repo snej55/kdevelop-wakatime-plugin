@@ -1,5 +1,19 @@
 # Wakatime for KDevelop
 
+## Dependencies:
+
+The following are required to be installed:
+
+* [CMake](https://cmake.org/)
+* [Extra CMake Modules](https://invent.kde.org/frameworks/extra-cmake-modules)
+* [KF6:I18n](https://github.com/KDE/ki18n)
+* [KF6:KTextEditor](https://github.com/KDE/ktexteditor)
+* [Qt6](https://doc.qt.io/qt-6/)
+
+For information see: 
+ * [Building KDE software with kde-builder](https://develop.kde.org/docs/getting-started/building/kde-builder-compile/)
+ * [KDevelop - Arch Wiki](https://wiki.archlinux.org/title/KDevelop)
+
 ## Installation instructions:
 
 First clone the repo:
@@ -12,7 +26,7 @@ cd kdevelop-wakatime-plugin
 
 Build it:
 ```
-cmake . -B build -DQT_MAJOR_VERSION=6
+cmake . -B build -DQT_MAJOR_VERSION=6 -DCMAKE_INSTALL_PREFIX=/usr
 cmake --build build/
 ```
 
