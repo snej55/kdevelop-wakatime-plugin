@@ -8,6 +8,7 @@
 #include <QDateTime>
 
 #define KDEV_WAKATIME_PLUGIN_VERSION "1.0.0"
+#define DEBUG_OUTPUT
 
 struct HeartBeat {
     QDateTime time;

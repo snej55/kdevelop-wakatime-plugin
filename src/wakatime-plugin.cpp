@@ -91,15 +91,21 @@ QString WakatimePlugin::getFileName(QUrl fileUrl)
 
 void WakatimePlugin::passDocument(void* document, bool isWrite)
 {
+#ifdef DEBUG_OUTPUT
         std::cout << "Trying to send heartbeat!\n";
+#endif
         KDevelop::IDocument* doc {static_cast<KDevelop::IDocument*>(document)};
         if (enoughTimePassed(QDateTime::currentDateTime()) || m_lastHeartBeat->fileUrl != doc->url()) {
+#ifdef DEBUG_OUTPUT
                 std::cout << "Enough time has passed!\n";
+#endif
                 QStringList options {buildHeartbeat(doc->url().path(), getProjectName(doc->url()), isWrite)};
                 sendHeartbeat(options);
                 updateLastHeartbeat(doc->url());
         } else {
+#ifdef DEBUG_OUTPUT
                 std::cout << "Not enough time has passed!\n";
+#endif
         }
 }
 
@@ -149,13 +155,16 @@ void WakatimePlugin::updateLastHeartbeat(QUrl filePath)
 
 bool WakatimePlugin::enoughTimePassed(QDateTime time) const
 {
-        std::cout << m_lastHeartBeat->time.secsTo(time) << '\n';
+#ifdef DEBUG_OUTPUT
+        std::cout << "Seconds since last heartbeat: " << m_lastHeartBeat->time.secsTo(time) << '\n';
+#endif
         return m_lastHeartBeat->time.secsTo(time) >= 120; // check if time is greater than 2 minutes
 }
 
 QStringList WakatimePlugin::buildHeartbeat(QString file, QString project, const bool isWrite) const
 {
         QStringList options;
+        options << "--plugin" << "KDevelop kdevelop-wakatime" << KDEV_WAKATIME_PLUGIN_VERSION;
         options << "--entity" << file;
 
         // if project isn't empty
@@ -183,7 +192,9 @@ QStringList WakatimePlugin::buildHeartbeat(QString file, QString project, const 
 void WakatimePlugin::sendHeartbeat(QStringList options)
 {
         ++m_heartBeatNum;
+#ifdef DEBUG_OUTPUT
         std::cout << "SENDING HEARTBEAT!" << '\n';
+#endif
         // get wakatime-cli binary
         QString bin {getWakatimeBinDir()};
 
