@@ -1,2 +1,0 @@
-/usr/share/qlogging-categories6/wakatime-plugin.categories
-/usr/lib/qt6/plugins/kdevplatform/61/wakatime-plugin.so

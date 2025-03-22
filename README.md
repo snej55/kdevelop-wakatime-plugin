@@ -1,6 +1,31 @@
 # Wakatime for KDevelop
 
-## Installation instructions
+## Installation instructions:
+
+First clone the repo:
+
+```
+cd ~/projects
+git clone https://github.com/snej55/kdevelop-wakatime-plugin.git
+cd kdevelop-wakatime-plugin
+```
+
+Build it:
+```
+cmake . -B build -DQT_MAJOR_VERSION=6
+cmake --build build/
+```
+
+Install:
+```
+sudo cmake --install build
+```
+
+Restart kdevelop, and the plugin should be installed!
+
+### Default kdevelop installation instructions:
+
+If the instructions above didn't work, you can try having a look at these (the default plugin installation instructions).
 
 Make sure the project is configured to install to the directory of your choice:
 
