@@ -18,4 +18,5 @@ target_link_libraries(wakatime-plugin
     KDev::Interfaces
     KF6::I18n
     KF6TextEditor
+    Qt6::Sql
 )

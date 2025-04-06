@@ -11,6 +11,7 @@
 #include <QDir>
 #include <QStandardPaths>
 #include <QProcess>
+#include <QSql>
 
 #include <iostream>
 
@@ -164,7 +165,7 @@ bool WakatimePlugin::enoughTimePassed(QDateTime time) const
 QStringList WakatimePlugin::buildHeartbeat(QString file, QString project, const bool isWrite) const
 {
         QStringList options;
-        options << "--plugin" << "KDevelop kdevelop-wakatime" << KDEV_WAKATIME_PLUGIN_VERSION;
+        options << "--plugin" << "KDevelop kdevelop-wakatime";
         options << "--entity" << file;
 
         // if project isn't empty
@@ -176,8 +177,7 @@ QStringList WakatimePlugin::buildHeartbeat(QString file, QString project, const 
                 options << "--write";
         }
 
-        QString pluginTitle {"kdevelop-wakatime-plugin"};
-        pluginTitle.append(QString{KDEV_WAKATIME_PLUGIN_VERSION});
+        QString pluginTitle {"kdevelop"};
         options << "--plugin" << pluginTitle;
 
         // locate config path

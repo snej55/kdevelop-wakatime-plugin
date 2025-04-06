@@ -22,6 +22,8 @@ ki18n_install(po)
 
 find_package(KF6TextEditor NO_MODULE REQUIRED)
 
+find_package(Qt6 REQUIRED COMPONENTS Sql)
+
 add_subdirectory(src)
 
 ecm_qt_install_logging_categories(

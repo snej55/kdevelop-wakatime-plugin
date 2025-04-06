@@ -6,6 +6,7 @@
 #include <interfaces/idocument.h>
 
 #include <QDateTime>
+#include <QSql>
 
 #define KDEV_WAKATIME_PLUGIN_VERSION "1.0.0"
 #define DEBUG_OUTPUT
@@ -70,5 +71,8 @@ public:
 private:
     WakatimePlugin* m_wakatimePlugin {nullptr};
 };
+
+// Offline caching
+
 
 #endif // WAKATIME_PLUGIN_H
