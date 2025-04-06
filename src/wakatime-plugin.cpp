@@ -177,7 +177,7 @@ QStringList WakatimePlugin::buildHeartbeat(QString file, QString project, const 
                 options << "--write";
         }
 
-        QString pluginTitle {"kdevelop"};
+        QString pluginTitle {"KDevelop"};
         options << "--plugin" << pluginTitle;
 
         // locate config path
