@@ -39,7 +39,7 @@ sudo cmake --install build
 
 Restart kdevelop, and the plugin should be installed!
 
-### General kdevelop installation instructions:
+### General kdevelop plugin installation instructions:
 
 If the instructions above didn't work, you can try having a look at these (the default plugin installation instructions).
 
